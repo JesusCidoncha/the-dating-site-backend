@@ -45,6 +45,10 @@ const userSchema = new Schema(
             enum: ['Single', 'Married', 'Just for fun', 'Not-sure']
         },
     },
+    {
+        // this second object adds extra properties: `createdAt` and `updatedAt`
+        timestamps: true,
+    }
 )
 
 const User = model('User', userSchema)
