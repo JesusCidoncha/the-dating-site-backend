@@ -1,5 +1,5 @@
 const Dog = require("../models/Dog.model");
-
+const { isAuthenticated } = require("../middlewares/route-guard.middleware");
 const router = require("express").Router();
 
 // GET all
