@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the Book model to whatever makes sense in this case
 const dogSchema = new Schema(
   {
     name: {
@@ -32,12 +31,12 @@ const dogSchema = new Schema(
       enum: ["big", "medium", "small"],
     },
     owner: {
-      type: Types.ObjectId,
+      type: Schema.Types.ObjectId, // Fixed mongoose.Schema.Types.ObjectId to Schema.Types.ObjectId
       ref: "User",
+      required: true, // Fixed misspelling 'require' to 'required'
     },
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
 );

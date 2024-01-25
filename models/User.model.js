@@ -6,24 +6,24 @@ const userSchema = new Schema(
         firstName: {
             type: String,
             unique: true,
-            required: true,
-            trim: true,
+            required: [true, " first Name is required"],
+            trim: true
         },
         lastName: {
             type: String,
             unique: true,
-            required: true,
-            trim: true,
+            required: [true, "last Name is required"],
+            trim: true
         },
         email: {
             type: String,
             lowercase: true,
-            required: true,
+            required: [true, "Email is required"],
             unique: true,
         },
         hashPassword: {
             type: String,
-            required: true,
+            required: [true, "HashPassword is required"],
             trim: true,
         },
         socialMedia: {
@@ -32,14 +32,9 @@ const userSchema = new Schema(
         },
         age: {
             type: Number,
-            required: true,
+            required: [true, 'Age is required'],
         },
-        location: {
-            type: {
-                enum: ['Point'],
-                required: true
-            },
-        },
+        location: { type: [Number], index: { type: '2dsphere', sparse: true } },
         civilStatus: {
             type: String,
             enum: ['Single', 'Married', 'Just for fun', 'Not-sure']

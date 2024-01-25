@@ -3,9 +3,9 @@ const User = require("../models/User.model");
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { isAuthenticated } = require("../middlewares/route-guard.middleware");
+const { isAuthenticated } = require("../middleware/route-guard.middleware");
 router.get("/", (req, res) => {
-  res.json("All good in auth");
+  res.json("All good in auth"); z
 });
 
 router.post("/signup", async (req, res) => {

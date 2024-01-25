@@ -1,4 +1,4 @@
-const { isAuthenticated } = require("../middlewares/route-guard.middleware");
+const { isAuthenticated } = require("../middleware/route-guard.middleware");
 const Event = require("../models/Event.model");
 const router = require("express").Router();
 

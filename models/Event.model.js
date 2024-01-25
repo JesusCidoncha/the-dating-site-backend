@@ -8,30 +8,26 @@ const eventSchema = new Schema(
       trim: true
     },
     time: {
-      timestamps: true
-
+      type: Date, // Fixed timestamps definition
+      default: Date.now
     },
-    eventDuration:{   
-    timestamps: true
-
+    eventDuration: {
+      type: Number // Assuming this is the duration in minutes or something similar
     },
-    location: {
-      type: {
-          enum: ['Point'],
-          required: true
-      },
-    },
+    location: { type: [Number], index: { type: '2dsphere', sparse: true } },
     owner: {
-      type: Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     }
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
 );
 
-const Dog = model("Dog", eventSchema);
+eventSchema.index({ location: "2dsphere" }); // Added index definition for GeoJSON
 
-module.exports = Dog;
+const Event = model("Event", eventSchema);
+
+module.exports = Event;
