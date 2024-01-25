@@ -5,7 +5,7 @@ const User = require("../models/User.model");
 
 router.get("/users", async (req, res, next) => {
   try {
-    const users = await User.find().populate("event");
+    const users = await User.find();
     console.log("Retrieved users ->", users);
     res.json(users);
   } catch (error) {

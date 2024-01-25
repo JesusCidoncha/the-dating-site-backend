@@ -1,6 +1,6 @@
 const { isAuthenticated } = require("../middlewares/route-guard.middleware");
-const router = require("express").Router();
 const Event = require("../models/Event.model");
+const router = require("express").Router();
 
 // GET all
 router.get("/", async (req, res) => {
