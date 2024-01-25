@@ -21,7 +21,7 @@ const userSchema = new Schema(
             required: [true, "Email is required"],
             unique: true,
         },
-        hashPassword: {
+        passwordHash: {
             type: String,
             required: [true, "HashPassword is required"],
             trim: true,
