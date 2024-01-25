@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { isAuthenticated } = require("../middlewares/route-guard.middleware");
+const { isAuthenticated } = require("../middleware/route-guard.middleware");
 const User = require("../models/User.model");
 
-router.get("/users", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const users = await User.find();
     console.log("Retrieved users ->", users);

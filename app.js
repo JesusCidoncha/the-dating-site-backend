@@ -13,10 +13,19 @@ require('./config')(app)
 
 // 👇 Start handling routes here
 const indexRoutes = require('./routes/index.routes')
-app.use(indexRoutes)
+app.use('/api', indexRoutes)
 
-const authRoutes = require('./routes/auth.routes')
-app.use('/auth', authRoutes)
+const userRouter = require('./routes/user.routes');
+app.use("/api", userRouter);
+
+const dogRouter = require('./routes/dog.routes');
+app.use("/api", dogRouter);
+
+const eventRouter = require('./routes/event.routes');
+app.use("/api", eventRouter);
+
+const authRouter = require("./routes/auth.routes");
+app.use("/auth", authRouter);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app)
