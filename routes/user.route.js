@@ -18,9 +18,9 @@ router.get("/users/:userId", async (req, res, next) => {
   const { userId } = req.params;
 
   try {
-    const User = await User.findById(userId).populate("event");
+    const user = await User.findById(userId);
 
-    res.status(200).json(User);
+    res.status(200).json(user);
   } catch (error) {
     next(error);
   }
@@ -30,9 +30,9 @@ router.get("/users/event/:eventId", async (req, res, next) => {
   const eventId = req.params.eventId;
 
   try {
-    const UserList = await User.find({ event: eventId }).populate("event");
+    const userList = await User.find({ event: eventId }).populate("event");
 
-    res.status(200).json(UserList);
+    res.status(200).json(userList);
   } catch (error) {
     next(error);
   }
@@ -42,9 +42,9 @@ router.get("/users/dog/:dogId", async (req, res, next) => {
   const { dogId } = req.params;
 
   try {
-    const UserList = await User.find({ event: dogId }).populate("event");
+    const userList = await User.find({ event: dogId }).populate("dog");
 
-    res.status(200).json(UserList);
+    res.status(200).json(userList);
   } catch (error) {
     next(error);
   }
