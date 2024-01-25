@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 router.get("/:dogId", async (req, res) => {
   const { dogId } = req.params;
   try {
-    const oneDog = await Book.findById(dogId);
+    const oneDog = await Dog.findById(dogId);
     res.status(200).json(oneDog);
   } catch (error) {
     console.log(error);
@@ -43,7 +43,7 @@ router.put("/:dogId", isAuthenticated, async (req, res) => {
   const payload = req.body;
   const { dogId } = req.params;
   try {
-    const dogToUpdate = await Book.findById(dogId);
+    const dogToUpdate = await Dog.findById(dogId);
     if (dogToUpdate.createdBy == userId) {
       const updatedDog = await Dog.findByIdAndUpdate(dogId, payload, {
         new: true,
@@ -62,11 +62,11 @@ router.delete("/:dogId", isAuthenticated, async (req, res) => {
   const { userId } = req.tokenPayload;
   const { dogId } = req.params;
   try {
-    const dogToDelete = await Book.findById(dogId);
+    const dogToDelete = await Dog.findById(dogId);
     console.log(dogToDelete, userId);
     if (dogToDelete.createdBy == userId) {
       console.log("Deleting");
-      await Book.findByIdAndDelete(dogId);
+      await Dog.findByIdAndDelete(dogId);
       res.status(204).json();
     } else {
       res.status(403).json({ message: "you are not the right user" });

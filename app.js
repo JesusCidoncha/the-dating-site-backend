@@ -16,13 +16,13 @@ const indexRoutes = require('./routes/index.routes')
 app.use('/api', indexRoutes)
 
 const userRouter = require('./routes/user.routes');
-app.use("/api", userRouter);
+app.use("/api/users", userRouter);
 
 const dogRouter = require('./routes/dog.routes');
-app.use("/api", dogRouter);
+app.use("/api/dogs", dogRouter);
 
 const eventRouter = require('./routes/event.routes');
-app.use("/api", eventRouter);
+app.use("/api/events", eventRouter);
 
 const authRouter = require("./routes/auth.routes");
 app.use("/auth", authRouter);

@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/users/:userId", async (req, res, next) => {
+router.get("/:userId", async (req, res, next) => {
   const { userId } = req.params;
 
   try {
@@ -26,7 +26,7 @@ router.get("/users/:userId", async (req, res, next) => {
   }
 });
 
-router.get("/users/event/:eventId", async (req, res, next) => {
+router.get("/event/:eventId", async (req, res, next) => {
   const eventId = req.params.eventId;
 
   try {
@@ -38,7 +38,7 @@ router.get("/users/event/:eventId", async (req, res, next) => {
   }
 });
 
-router.get("/users/dog/:dogId", async (req, res, next) => {
+router.get("/dog/:dogId", async (req, res, next) => {
   const { dogId } = req.params;
 
   try {
@@ -51,7 +51,7 @@ router.get("/users/dog/:dogId", async (req, res, next) => {
 });
 
 //POST - /users
-router.post("/users", isAuthenticated, async (req, res, next) => {
+router.post("/", isAuthenticated, async (req, res, next) => {
   try {
     const user = await User.create(req.body);
     res.status(201).json(user);
@@ -61,7 +61,7 @@ router.post("/users", isAuthenticated, async (req, res, next) => {
 });
 
 //PUT - /User
-router.put("/users/:userId", isAuthenticated, async (request, response) => {
+router.put("/:userId", isAuthenticated, async (request, response) => {
   console.log(request.body);
   const payload = request.body;
   try {
