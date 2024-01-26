@@ -15,7 +15,7 @@ const eventSchema = new Schema(
       type: Number // Assuming this is the duration in minutes or something similar
     },
     location: { type: [Number], index: { type: '2dsphere', sparse: true } },
-    owner: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,

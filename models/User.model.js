@@ -39,6 +39,8 @@ const userSchema = new Schema(
             type: String,
             enum: ['Single', 'Married', 'Just for fun', 'Not-sure']
         },
+        events: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
+        dogs: { type: Schema.Types.ObjectId, ref: 'Dog' },
     },
     {
         // this second object adds extra properties: `createdAt` and `updatedAt`

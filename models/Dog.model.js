@@ -30,10 +30,10 @@ const dogSchema = new Schema(
       required: [true, "Size is required."],
       enum: ["big", "medium", "small"],
     },
-    owner: {
-      type: Schema.Types.ObjectId, // Fixed mongoose.Schema.Types.ObjectId to Schema.Types.ObjectId
+    user: {
+      type: Schema.Types.ObjectId,
       ref: "User",
-      required: true, // Fixed misspelling 'require' to 'required'
+      required: true
     },
   },
   {
