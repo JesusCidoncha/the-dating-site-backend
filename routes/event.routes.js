@@ -12,6 +12,7 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: "error while getting the events" });
   }
 });
+
 // GET one
 router.get("/:eventId", async (req, res) => {
   const { eventId } = req.params;
@@ -37,6 +38,7 @@ router.post("/", isAuthenticated, async (req, res) => {
     res.status(500).json({ message: "error while creating the event" });
   }
 });
+
 // PUT one
 router.put("/:eventId", isAuthenticated, async (req, res) => {
   const { userId } = req.tokenPayload;
@@ -57,6 +59,7 @@ router.put("/:eventId", isAuthenticated, async (req, res) => {
     res.status(500).json({ message: "error while updating the event" });
   }
 });
+
 // DELETE one
 router.delete("/:eventId", isAuthenticated, async (req, res) => {
   const { userId } = req.tokenPayload;

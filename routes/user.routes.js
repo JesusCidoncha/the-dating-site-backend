@@ -26,11 +26,14 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
+
 router.get("/event/:eventId", async (req, res, next) => {
   const eventId = req.params.eventId;
+  console.log('eventId:', eventId);
 
   try {
-    const userList = await User.find({ event: eventId }).populate("event");
+    const userList = await User.find({ event: eventId }).populate("Event");
+    console.log('userList:', userList);
 
     res.status(200).json(userList);
   } catch (error) {
@@ -78,8 +81,10 @@ router.put("/:userId", isAuthenticated, async (request, response) => {
 });
 
 //  DELETE  /users/:UserId route
-router.delete("/users/:userId", isAuthenticated, async (request, response) => {
+router.delete("/:userId", isAuthenticated, async (request, response) => {
   const { userId } = request.params;
+
+  console.log(userId)
   try {
     const userToDelete = await User.findByIdAndDelete(userId);
     response
