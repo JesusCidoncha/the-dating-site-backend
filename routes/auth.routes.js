@@ -4,8 +4,9 @@ const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { isAuthenticated } = require("../middleware/route-guard.middleware");
+
 router.get("/", (req, res) => {
-  res.json("All good in auth"); z
+  res.json("All good in auth");
 });
 
 router.post("/signup", async (req, res) => {
@@ -40,8 +41,6 @@ router.post("/login", async (req, res) => {
   try {
     const potentialUser = await User.findOne({ email });
     if (potentialUser) {
-      // User does exist
-      // Compare passwords
       const passwordCorrect = bcrypt.compareSync(
         password,
         potentialUser.hashedPassword
@@ -57,12 +56,10 @@ router.post("/login", async (req, res) => {
         );
         res.status(200).json({ token: authToken });
       } else {
-        // Incorrect password
         console.log("Problem while checking for the password");
         res.status(403).json({ message: "Something went wrong" });
       }
     } else {
-      // No user with this email
       console.log("Problem while checking for the email");
       res.status(403).json({ message: "Something went wrong" });
     }
