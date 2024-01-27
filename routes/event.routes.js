@@ -71,7 +71,7 @@ router.delete("/:eventId", isAuthenticated, async (req, res) => {
   try {
     const eventToDelete = await Event.findById(eventId);
 
-    if (eventToDelete.user == userId) {
+    if (eventToDelete.user.toHexString() === userId) {
       console.log("Deleting");
       await Event.findByIdAndDelete(eventId);
       res.status(204).json();

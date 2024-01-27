@@ -64,7 +64,7 @@ router.delete("/:dogId", isAuthenticated, async (req, res) => {
   try {
     const dogToDelete = await Dog.findById(dogId);
     console.log(dogToDelete, userId);
-    if (dogToDelete.createdBy == userId) {
+    if (dogToDelete.createdBy.toHexString() === userId) {
       console.log("Deleting");
       await Dog.findByIdAndDelete(dogId);
       res.status(204).json();
