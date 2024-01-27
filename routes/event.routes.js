@@ -31,7 +31,7 @@ router.post("/", isAuthenticated, async (req, res) => {
   console.log('payload:', payload);
 
   const { userId } = req.tokenPayload;
-  payload.createdBy = userId;
+  payload.user = userId;
   try {
     const createdEvent = await Event.create(payload);
     res.status(201).json(createdEvent);
@@ -48,8 +48,11 @@ router.put("/:eventId", isAuthenticated, async (req, res) => {
 
   const { eventId } = req.params;
   try {
+
     const eventToUpdate = await Event.findById(eventId);
-    if (eventToUpdate.createdBy === userId) {
+    const id = eventToUpdate.user.toHexString()
+
+    if (id === userId) {
       const updatedEvent = await Event.findByIdAndUpdate(eventId, payload, {
         new: true,
       });
@@ -69,9 +72,11 @@ router.delete("/:eventId", isAuthenticated, async (req, res) => {
 
   const { eventId } = req.params;
   try {
-    const eventToDelete = await Event.findById(eventId);
 
-    if (eventToDelete.user.toHexString() === userId) {
+    const eventToDelete = await Event.findById(eventId);
+    const id = eventToDelete.user.toHexString();
+
+    if (id === userId) {
       console.log("Deleting");
       await Event.findByIdAndDelete(eventId);
       res.status(204).json();

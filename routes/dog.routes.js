@@ -29,7 +29,7 @@ router.get("/:dogId", async (req, res) => {
 router.post("/", isAuthenticated, async (req, res) => {
   const payload = req.body;
   const { userId } = req.tokenPayload;
-  payload.createdBy = userId;
+  payload.user = userId;
   try {
     const newDog = await Dog.create(payload);
     res.status(201).json(newDog);
@@ -38,14 +38,18 @@ router.post("/", isAuthenticated, async (req, res) => {
     res.status(500).json({ message: "error while adding the dog" });
   }
 });
+
 // PUT one
 router.put("/:dogId", isAuthenticated, async (req, res) => {
   const { userId } = req.tokenPayload;
   const payload = req.body;
   const { dogId } = req.params;
   try {
+
     const dogToUpdate = await Dog.findById(dogId);
-    if (dogToUpdate.createdBy == userId) {
+    const id = dogToUpdate.user.toHexString
+
+    if (id === userId) {
       const updatedDog = await Dog.findByIdAndUpdate(dogId, payload, {
         new: true,
       });
@@ -63,9 +67,13 @@ router.put("/:dogId", isAuthenticated, async (req, res) => {
 router.delete("/:dogId", isAuthenticated, async (req, res) => {
   const { userId } = req.tokenPayload;
   const { dogId } = req.params;
+
   try {
+
     const dogToDelete = await Dog.findById(dogId);
-    if (dogToDelete.createdBy.toHexString() === userId) {
+    const id = dogToDelete.user.toHexString()
+
+    if (id === userId) {
       console.log("Deleting");
       await Dog.findByIdAndDelete(dogId);
       res.status(204).json();
