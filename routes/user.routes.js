@@ -32,7 +32,7 @@ router.get("/event/:eventId", async (req, res, next) => {
   console.log('eventId:', eventid);
 
   try {
-    const userList = await User.find({ user: eventid }).populate("user");
+    const userList = await User.find({ user: eventid }).populate('Event');
     console.log('userList:', userList);
 
     res.status(200).json(userList);
@@ -45,7 +45,7 @@ router.get("/dog/:dogId", async (req, res, next) => {
   const { dogId } = req.params;
 
   try {
-    const userList = await User.find({ user: dogId }).populate("dog");
+    const userList = await User.find({ user: dogId }).populate("Dog");
 
     res.status(200).json(userList);
   } catch (error) {

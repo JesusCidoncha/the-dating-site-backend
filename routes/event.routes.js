@@ -28,6 +28,8 @@ router.get("/:eventId", async (req, res) => {
 // POST one
 router.post("/", isAuthenticated, async (req, res) => {
   const payload = req.body;
+  console.log('payload:', payload);
+
   const { userId } = req.tokenPayload;
   payload.createdBy = userId;
   try {
@@ -43,10 +45,11 @@ router.post("/", isAuthenticated, async (req, res) => {
 router.put("/:eventId", isAuthenticated, async (req, res) => {
   const { userId } = req.tokenPayload;
   const payload = req.body;
+
   const { eventId } = req.params;
   try {
     const eventToUpdate = await Event.findById(eventId);
-    if (eventToUpdate.createdBy == userId) {
+    if (eventToUpdate.createdBy === userId) {
       const updatedEvent = await Event.findByIdAndUpdate(eventId, payload, {
         new: true,
       });
@@ -63,11 +66,15 @@ router.put("/:eventId", isAuthenticated, async (req, res) => {
 // DELETE one
 router.delete("/:eventId", isAuthenticated, async (req, res) => {
   const { userId } = req.tokenPayload;
+  console.log('userId______', userId);
+
   const { eventId } = req.params;
+  console.log('eventId ______', eventId);
   try {
     const eventToDelete = await Event.findById(eventId);
-    console.log(eventToDelete, userId);
-    if (eventToDelete.createdBy == userId) {
+
+    console.log("CreatedBy:", eventToDelete.user, "userID:", userId);
+    if (eventToDelete.user == userId) {
       console.log("Deleting");
       await Event.findByIdAndDelete(eventId);
       res.status(204).json();
