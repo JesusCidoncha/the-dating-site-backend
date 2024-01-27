@@ -16,6 +16,7 @@ router.get("/", async (req, res) => {
 // GET one
 router.get("/:dogId", async (req, res) => {
   const { dogId } = req.params;
+
   try {
     const oneDog = await Dog.findById(dogId);
     res.status(200).json(oneDog);
@@ -30,6 +31,7 @@ router.post("/", isAuthenticated, async (req, res) => {
   const payload = req.body;
   const { userId } = req.tokenPayload;
   payload.user = userId;
+
   try {
     const newDog = await Dog.create(payload);
     res.status(201).json(newDog);
@@ -44,9 +46,10 @@ router.put("/:dogId", isAuthenticated, async (req, res) => {
   const { userId } = req.tokenPayload;
   const payload = req.body;
   const { dogId } = req.params;
-  try {
 
+  try {
     const dogToUpdate = await Dog.findById(dogId);
+    //Convert user id (ObjectId) to a string
     const id = dogToUpdate.user.toHexString
 
     if (id === userId) {
@@ -69,8 +72,8 @@ router.delete("/:dogId", isAuthenticated, async (req, res) => {
   const { dogId } = req.params;
 
   try {
-
     const dogToDelete = await Dog.findById(dogId);
+    //  Convert user id (ObjectId) to a string
     const id = dogToDelete.user.toHexString()
 
     if (id === userId) {

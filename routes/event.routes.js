@@ -28,10 +28,11 @@ router.get("/:eventId", async (req, res) => {
 // POST one
 router.post("/", isAuthenticated, async (req, res) => {
   const payload = req.body;
-  console.log('payload:', payload);
+
 
   const { userId } = req.tokenPayload;
   payload.user = userId;
+
   try {
     const createdEvent = await Event.create(payload);
     res.status(201).json(createdEvent);
@@ -47,9 +48,10 @@ router.put("/:eventId", isAuthenticated, async (req, res) => {
   const payload = req.body;
 
   const { eventId } = req.params;
-  try {
 
+  try {
     const eventToUpdate = await Event.findById(eventId);
+    //  Convert user id (ObjectId) to a string
     const id = eventToUpdate.user.toHexString()
 
     if (id === userId) {
@@ -72,8 +74,8 @@ router.delete("/:eventId", isAuthenticated, async (req, res) => {
 
   const { eventId } = req.params;
   try {
-
     const eventToDelete = await Event.findById(eventId);
+    //Convert user id (ObjectId) to a string
     const id = eventToDelete.user.toHexString();
 
     if (id === userId) {
