@@ -12,6 +12,7 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: "error while getting the dogs" });
   }
 });
+
 // GET one
 router.get("/:dogId", async (req, res) => {
   const { dogId } = req.params;
@@ -57,13 +58,13 @@ router.put("/:dogId", isAuthenticated, async (req, res) => {
     res.status(500).json({ message: "error while updating the dog" });
   }
 });
+
 // DELETE one
 router.delete("/:dogId", isAuthenticated, async (req, res) => {
   const { userId } = req.tokenPayload;
   const { dogId } = req.params;
   try {
     const dogToDelete = await Dog.findById(dogId);
-    console.log(dogToDelete, userId);
     if (dogToDelete.createdBy.toHexString() === userId) {
       console.log("Deleting");
       await Dog.findByIdAndDelete(dogId);
