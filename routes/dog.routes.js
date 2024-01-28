@@ -48,9 +48,9 @@ router.put("/:dogId", isAuthenticated, async (req, res) => {
   const { dogId } = req.params;
 
   try {
-    const dogToUpdate = await Dog.findById(dogId);
+    const {user} = await Dog.findById(dogId);
     //Convert user id (ObjectId) to a string
-    const id = dogToUpdate.user.toHexString
+    const id = user.toHexString;
 
     if (id === userId) {
       const updatedDog = await Dog.findByIdAndUpdate(dogId, payload, {
@@ -66,15 +66,15 @@ router.put("/:dogId", isAuthenticated, async (req, res) => {
   }
 });
 
-// DELETE one
 router.delete("/:dogId", isAuthenticated, async (req, res) => {
   const { userId } = req.tokenPayload;
   const { dogId } = req.params;
 
   try {
-    const dogToDelete = await Dog.findById(dogId);
+    const {user} = await Dog.findById(dogId);
+    console.log("user:",user);
     //  Convert user id (ObjectId) to a string
-    const id = dogToDelete.user.toHexString()
+    const id = user.toHexString()
 
     if (id === userId) {
       console.log("Deleting");

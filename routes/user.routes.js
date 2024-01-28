@@ -28,11 +28,11 @@ router.get("/:userId", async (req, res, next) => {
 
 
 router.get("/event/:eventId", async (req, res, next) => {
-  const eventid = req.params.eventId;
-  console.log('eventId:', eventid);
-
+  const {eventId} = req.params;
+  console.log('eventId:', eventId);
+  console.log("testing ")
   try {
-    const userList = await User.find({ user: eventid }).populate('Event');
+    const userList = await User.find({ user: eventId }).populate('Event');
     console.log('userList:', userList);
 
     res.status(200).json(userList);
@@ -67,6 +67,7 @@ router.post("/", isAuthenticated, async (req, res, next) => {
 router.put("/:userId", isAuthenticated, async (request, response) => {
   console.log(request.body);
   const payload = request.body;
+
   try {
     const updatedUser = await User.findByIdAndUpdate(
       request.params.userId,
