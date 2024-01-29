@@ -10,7 +10,8 @@ router.get("/", (req, res) => {
 });
 
 router.post("/signup", async (req, res) => {
-  const { firstName, lastName, age, email, password } = req.body;
+  const { firstName, lastName, age, email, password, socialMedia, location, civilStatus, events, dog } = req.body;
+  console.log(req.body)
   try {
 
     const potentialUser = await User.findOne({ email });
@@ -19,7 +20,8 @@ router.post("/signup", async (req, res) => {
       const salt = bcrypt.genSaltSync(13);
       const passwordHash = bcrypt.hashSync(password, salt);
       try {
-        await User.create({ firstName, lastName, age, email, passwordHash });
+        const userToCreate =
+          await User.create({ firstName, lastName, age, email, passwordHash, socialMedia, location, events, dog, civilStatus });
         res.status(201).json({ message: "User created" });
       } catch (error) {
         console.log(error);

@@ -36,7 +36,7 @@ const userSchema = new Schema(
         location: { type: [Number], index: { type: '2dsphere', sparse: true } },
         civilStatus: {
             type: String,
-            enum: ['Single', 'Married', 'Just for fun', 'Not-sure']
+            enum: ['single', 'married', 'just for fun']
         },
         events: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
         dogs: { type: Schema.Types.ObjectId, ref: 'Dog' },
