@@ -16,10 +16,9 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:userId", async (req, res, next) => {
   const { userId } = req.params;
-
+  console.log("userId:", userId)
   try {
     const user = await User.findById(userId);
-
     res.status(200).json(user);
   } catch (error) {
     next(error);
@@ -28,7 +27,7 @@ router.get("/:userId", async (req, res, next) => {
 
 
 router.get("/event/:eventId", async (req, res, next) => {
-  const {eventId} = req.params;
+  const { eventId } = req.params;
   console.log('eventId:', eventId);
   console.log("testing ")
   try {
