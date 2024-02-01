@@ -28,6 +28,7 @@ router.get("/:eventId", async (req, res) => {
 // POST one
 router.post("/", isAuthenticated, async (req, res) => {
   const payload = req.body;
+  console.log(payload)
   const { userId } = req.tokenPayload;
   payload.user = userId;
 

@@ -29,8 +29,8 @@ const userSchema = new Schema(
             type: String,
             enum: ['Instagram', 'Meta', 'X', 'Linkedin']
         },
-        age: {
-            type: Number,
+        birthday: {
+            type: Date,
             required: [true, 'Age is required'],
         },
         location: { type: [Number], index: { type: '2dsphere', sparse: true } },

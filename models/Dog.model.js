@@ -20,10 +20,10 @@ const dogSchema = new Schema(
       type: String,
       required: [true, "Breed is required."],
     },
-    status: {
+    civilStatus: {
       type: String,
       required: [true, "Status is required."],
-      enum: ["Single", "Married", "Looking to breed"],
+      enum: ["single", "married", "looking to breed"],
     },
     size: {
       type: String,
