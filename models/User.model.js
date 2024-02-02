@@ -33,7 +33,7 @@ const userSchema = new Schema(
             type: Date,
             required: [true, 'Age is required'],
         },
-        location: { type: [Number], index: { type: '2dsphere', sparse: true } },
+        address: { type: Schema.Types.ObjectId, ref: 'Address' },
         civilStatus: {
             type: String,
             enum: ['single', 'married', 'just for fun']
