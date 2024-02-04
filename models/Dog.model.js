@@ -30,7 +30,7 @@ const dogSchema = new Schema(
       required: [true, "Size is required."],
       enum: ["big", "medium", "small"],
     },
-    ownwer: {
+    owner: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,

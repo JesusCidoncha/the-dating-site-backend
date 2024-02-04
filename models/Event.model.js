@@ -14,12 +14,11 @@ const eventSchema = new Schema(
     eventDuration: {
       type: Number,
     },
+    address: { type: Schema.Types.ObjectId, ref: 'Address' },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
-    address: { type: Schema.Types.ObjectId, ref: 'Address' },
   },
   {
     timestamps: true,
