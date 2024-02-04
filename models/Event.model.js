@@ -5,21 +5,21 @@ const eventSchema = new Schema(
     name: {
       type: String,
       required: [true, "Name is required."],
-      trim: true
+      trim: true,
     },
     time: {
-      type: Date, // Fixed timestamps definition
+      type: Date,
       default: Date.now
     },
     eventDuration: {
-      type: Number // Assuming this is the duration in minutes or something similar
+      type: Number,
     },
-    address: { type: Schema.Types.ObjectId, ref: 'Address' },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
-    }
+    },
+    address: { type: Schema.Types.ObjectId, ref: 'Address' },
   },
   {
     timestamps: true,
