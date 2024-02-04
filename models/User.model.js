@@ -38,6 +38,8 @@ const userSchema = new Schema(
             type: String,
             enum: ['single', 'married', 'just for fun']
         },
+        dogs: [{ type: Schema.Types.ObjectId, ref: 'Dog' }],
+        events: [{ type: Schema.Types.ObjectId, ref: 'Event' }]
     },
     {
         timestamps: true,

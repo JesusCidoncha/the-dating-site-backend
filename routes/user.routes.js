@@ -32,7 +32,9 @@ router.get("/event/:eventId", async (req, res, next) => {
   console.log('eventId:', eventId);
 
   try {
-    const userList = await User.find({ user: eventId }).populate('Event');
+    const userList = await User.find({ user: eventId }).populate('owner');
+
+    console.log(userList.populated('owner'))
     console.log('userList:', userList);
 
     res.status(200).json(userList);
