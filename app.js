@@ -1,33 +1,22 @@
-// ℹ️ Gets access to environment variables/settings
-// https://www.npmjs.com/package/dotenv
 require('dotenv').config()
 
-// Handles http requests (express is node js framework)
-// https://www.npmjs.com/package/express
 const express = require('express')
-
 const app = express()
 const cors = require('cors')
-// ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
+const indexRoutes = require('./routes/index.routes')
+const userRoute = require('./routes/user.routes');
+const dogRoute = require('./routes/dog.routes');
+const eventRoute = require('./routes/event.routes');
+const authRoute = require("./routes/auth.routes");
+
 require('./config')(app)
 app.use(cors());
-// 👇 Start handling routes here
-const indexRoutes = require('./routes/index.routes')
 app.use('/api', indexRoutes)
+app.use("/api/users", userRoute);
+app.use("/api/dogs", dogRoute);
+app.use("/api/events", eventRoute);
+app.use("/auth", authRoute);
 
-const userRouter = require('./routes/user.routes');
-app.use("/api/users", userRouter);
-
-const dogRouter = require('./routes/dog.routes');
-app.use("/api/dogs", dogRouter);
-
-const eventRouter = require('./routes/event.routes');
-app.use("/api/events", eventRouter);
-
-const authRouter = require("./routes/auth.routes");
-app.use("/auth", authRouter);
-
-// ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app)
 
 module.exports = app

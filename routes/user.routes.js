@@ -29,10 +29,11 @@ router.get("/:userId", async (req, res, next) => {
 router.get("/event/:eventId", async (req, res, next) => {
   const testing = req.params;
 
-  console.log('hellooooooo:', testing);
+
+  console.log('EventId:', testing);
 
   try {
-    const userList = await User.find().populate('events');
+    const userList = await User.find().populate('userId');
 
     console.log('userList:', userList);
 
@@ -43,11 +44,10 @@ router.get("/event/:eventId", async (req, res, next) => {
 });
 
 router.get("/dog/:dogId", async (req, res, next) => {
-
-  const { dogId } = req.params;
+  console.log(req.params)
 
   try {
-    const userList = await User.find().populate("dogs");
+    const userList = await User.find().populate("userId");
 
     res.status(200).json(userList);
   } catch (error) {

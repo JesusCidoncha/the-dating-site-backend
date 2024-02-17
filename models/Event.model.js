@@ -15,7 +15,7 @@ const eventSchema = new Schema(
       type: Number,
     },
     address: { type: Schema.Types.ObjectId, ref: 'Address' },
-    owner: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
